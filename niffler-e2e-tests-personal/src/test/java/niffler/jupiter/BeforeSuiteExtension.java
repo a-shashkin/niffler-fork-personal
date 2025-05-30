@@ -1,28 +1,6 @@
 package niffler.jupiter;
 
-import com.codeborne.selenide.LocalStorage;
-import com.codeborne.selenide.Selenide;
-import niffler.retrofit.SpendApiClient;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLParameters;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.*;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.nio.file.Paths;
-import java.time.Duration;
-import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
-
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.prompt;
+import java.sql.*;
 
 public class BeforeSuiteExtension implements AroundAllTestsExtension {
 
@@ -31,36 +9,44 @@ public class BeforeSuiteExtension implements AroundAllTestsExtension {
         //AroundAllTestsExtension.super.beforeAllTests();
         //System.out.println("BEFORE SUITE!!!");
 
-        SpendApiClient spendApiClient;
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://127.0.0.1:8090/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        spendApiClient = retrofit.create(SpendApiClient.class);
-
-        // здесь нужно дописать вызов метода /api/spends/add с телом из JSON-файла
-        // через Retrofit с авторизацией через Bearer token
-
-        Selenide.open("http://127.0.0.1:9000/login");
-        $("input[name='username']").setValue("testuser");
-        $("input[name='password']").setValue("testuser");
-        $(".form__submit").click();
-
-        LocalStorage localStorage = Selenide.localStorage();
-        String bearerToken = localStorage.getItem("id_token");
-
-
-
-        $("svg[data-testid='PersonIcon']").click();
-        $(byText("Sign out")).click();
-        $(byText("Log out")).click();
+        try {
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:postgresql://localhost:5432/niffler-spend",
+                    "postgres",
+                    "secret"
+            );
+            Statement statement = connection.createStatement();
+            int insertedColumns = statement.executeUpdate("insert into \"spend\" (username, spend_date, currency, amount, description, category_id)\n" +
+                    " values ('testuser', '2025-05-28', 'RUB', '1000.5', 'Обучение в QA.GURU ADVANCED', '0852fcf6-3c88-11f0-9e4a-e6cc26d07876')"
+            );
+            statement.close();
+            connection.close();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void afterAllTests() {
         //AroundAllTestsExtension.super.afterAllTests();
-        System.out.println("AFTER SUITE!!!");
+        //System.out.println("AFTER SUITE!!!");
+        try {
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:postgresql://localhost:5432/niffler-spend",
+                    "postgres",
+                    "secret"
+            );
+            Statement statement = connection.createStatement();
+            int deletedColumns = statement.executeUpdate(
+                    " delete from \"spend\"\n" +
+                        " where username = 'testuser'"
+            );
+            statement.close();
+            connection.close();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
