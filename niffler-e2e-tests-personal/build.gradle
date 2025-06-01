@@ -1,6 +1,8 @@
 plugins {
     id 'java'
     id("io.freefair.lombok") version "8.13.1"
+    id 'io.qameta.allure' version '2.11.2'
+    id 'io.qameta.allure-adapter' version '2.12.0'
 }
 
 group = 'guru.qa'
@@ -18,6 +20,10 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.okhttp3:okhttp:4.12.0'
     implementation 'org.postgresql:postgresql:42.7.5'
+    implementation("io.qameta.allure:allure-junit5:2.20.1") {
+        exclude group: "org.junit.platform"
+        exclude group: "org.junit.jupiter"
+    }
 }
 
 test {
