@@ -9,6 +9,6 @@ public interface NifflerSpendService {
 
     String nifflerSpendUri = "http://127.0.0.1:8093";
 
-    @POST("api/spends/add")
+    @POST("/internal/spends/add")
     Call<SpendJson> addSpend(@Body SpendJson spendJson);
 }
