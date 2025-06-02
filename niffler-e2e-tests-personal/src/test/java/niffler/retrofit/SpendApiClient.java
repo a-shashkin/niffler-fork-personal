@@ -1,5 +1,6 @@
 package niffler.retrofit;
 
+import niffler.dto.SpendJson;
 import niffler.dto.SpendModel;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -11,5 +12,5 @@ public interface SpendApiClient {
     @POST("api/spends/add")
     Call<SpendModel> createSpend(
             @Header("Authorization") String authorization,
-            @Body SpendModel spendModel);
+            @Body SpendJson spendJson);
 }

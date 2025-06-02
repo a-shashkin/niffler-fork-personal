@@ -1,0 +1,13 @@
+{
+  "spendDate": "2025-05-29",
+  "category": {
+    "id": "0852fcf6-3c88-11f0-9e4a-e6cc26d07876",
+    "name": "Обучение в QA.GURU ADVANCED",
+    "username": "testuser",
+    "archived": false
+  },
+  "currency": "USD",
+  "amount": 300,
+  "description": "Обучение в QA.GURU ADVANCED",
+  "username": "testuser"
+}

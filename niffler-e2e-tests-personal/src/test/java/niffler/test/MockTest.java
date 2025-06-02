@@ -1,4 +1,4 @@
-package niffler;
+package niffler.test;
 
 import niffler.jupiter.*;
 import org.junit.jupiter.api.*;
