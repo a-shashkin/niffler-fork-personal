@@ -13,6 +13,16 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import static niffler.jupiter.User.UserType.ADMIN;
 import static niffler.jupiter.User.UserType.COMMON;
 
+// TODO необходимо поэкспериментировать с ExtensionContext.getRequiredTestMethod(),
+//  ExtensionContext.getRequiredTestClass(), ExtensionContext.getRequiredTestInstance(),
+//  понять на каком этапе жизненного цикла Extension они работают.
+//  Возможно, это можно в MockTest провернуть.
+
+// TODO дополнить UsersExtension возможностью указать двух юзеров разных типов в одном тесте.
+//  UsersExtension должен обеспечивать резолв обоих юзеров,
+//  дожидаясь, пока нужная для теста комбинация не станет доступна в очередях.
+//  Вместе с этим надо будет и SampleApiTest допилить.
+
 public class UsersExtension implements
         BeforeTestExecutionCallback,
         AfterTestExecutionCallback,

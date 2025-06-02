@@ -9,6 +9,9 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class NifflerSpendingTableTest extends BaseTest {
 
+    // TODO Сделать версию теста, которая работает через API, а не базу данных.
+    //  Должно теперь получиться, если образец из урока получится заставить работать.
+
     @Test
     void spendingMustShowInTableTest() {
         open("http://127.0.0.1:9000/login");
