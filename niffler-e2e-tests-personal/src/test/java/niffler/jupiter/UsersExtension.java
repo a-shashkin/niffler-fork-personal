@@ -1,6 +1,7 @@
 package niffler.jupiter;
 
 import io.qameta.allure.AllureId;
+import io.qameta.allure.Story;
 import niffler.dto.UserModel;
 import org.junit.jupiter.api.extension.*;
 
@@ -13,17 +14,14 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import static niffler.jupiter.User.UserType.ADMIN;
 import static niffler.jupiter.User.UserType.COMMON;
 
-// TODO необходимо поэкспериментировать с ExtensionContext.getRequiredTestMethod(),
-//  ExtensionContext.getRequiredTestClass(), ExtensionContext.getRequiredTestInstance(),
-//  понять на каком этапе жизненного цикла Extension они работают.
-//  Возможно, это можно в MockTest провернуть.
-
 // TODO дополнить UsersExtension возможностью указать двух юзеров разных типов в одном тесте.
 //  UsersExtension должен обеспечивать резолв обоих юзеров,
 //  дожидаясь, пока нужная для теста комбинация не станет доступна в очередях.
 //  Вместе с этим надо будет и SampleApiTest допилить.
 
 public class UsersExtension implements
+        BeforeAllCallback,
+        BeforeEachCallback,
         BeforeTestExecutionCallback,
         AfterTestExecutionCallback,
         ParameterResolver {
@@ -84,9 +82,25 @@ public class UsersExtension implements
 //            context.getRequiredTestMethod().getName();
 //        }
 
+        System.out.println("            ### getRequiredTestMethod() works here. ###");
+
         return Objects.requireNonNull(
                 context.getRequiredTestMethod().getAnnotation(AllureId.class)
         ).value();
+    }
+
+    private String getTestClass(ExtensionContext context) {
+
+        return Objects.requireNonNull(
+                context.getRequiredTestClass().getAnnotation(Story.class)
+        ).value();
+    }
+
+    private String getTestInstance(ExtensionContext context) {
+
+        return Objects.requireNonNull(
+                context.getRequiredTestInstance()
+        ).toString();
     }
 
     @Override
@@ -104,5 +118,17 @@ public class UsersExtension implements
                 .values()
                 .iterator()
                 .next();
+    }
+
+    @Override
+    public void beforeAll(ExtensionContext context) throws Exception {
+        String testClass = getTestClass(context);
+        System.out.println("    ### getRequiredTestClass() works here for class " + testClass + " ###");
+    }
+
+    @Override
+    public void beforeEach(ExtensionContext context) throws Exception {
+        String testInstance = getTestInstance(context);
+        System.out.println("        ### getRequiredTestInstance() works here for instance " + testInstance + " ###");
     }
 }

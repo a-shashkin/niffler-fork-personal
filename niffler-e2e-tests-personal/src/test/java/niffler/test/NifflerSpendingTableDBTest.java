@@ -7,10 +7,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class NifflerSpendingTableTest extends BaseTest {
-
-    // TODO Сделать версию теста, которая работает через API, а не базу данных.
-    //  Должно теперь получиться, если образец Retrofit из урока получится заставить работать.
+public class NifflerSpendingTableDBTest extends BaseTestAPIPreparation {
 
     @Test
     void spendingMustShowInTableTest() {

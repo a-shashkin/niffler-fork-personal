@@ -2,7 +2,7 @@ package niffler.jupiter;
 
 import java.sql.*;
 
-public class BeforeSuiteExtension implements AroundAllTestsExtension {
+public class BeforeSuiteExtensionDatabasePreparation implements AroundAllTestsExtension {
 
     @Override
     public void beforeAllTests() {

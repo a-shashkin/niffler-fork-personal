@@ -11,7 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
         MyAfterAllExtension.class
 }*/
 MySuperExtension.class)
-public class MockTest extends BaseTest {
+public class MockTest extends BaseTestDatabasePreparation {
 
     @BeforeAll
     static void setUpAll() {

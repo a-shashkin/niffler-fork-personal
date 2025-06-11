@@ -3,16 +3,19 @@ package niffler.test;
 import com.codeborne.selenide.Condition;
 import io.qameta.allure.Allure;
 import io.qameta.allure.AllureId;
+import io.qameta.allure.Story;
 import niffler.dto.UserModel;
 import niffler.jupiter.ScreenshotExtension;
 import niffler.jupiter.User;
 import niffler.jupiter.UsersExtension;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
+@Story("Login tests")
 @ExtendWith({ScreenshotExtension.class, UsersExtension.class})
 public class NifflerLoginTest {
 
