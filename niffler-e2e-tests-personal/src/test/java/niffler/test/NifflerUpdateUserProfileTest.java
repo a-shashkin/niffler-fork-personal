@@ -1,0 +1,30 @@
+package niffler.test;
+
+// TODO реализовать тесты на обновление профиля, напрямую в niffler-userdata.
+//  Обязательно надо использовать ArgumentConverter для параметра UserJson.
+//  Разумеется, нужно будет и написать Retrofit-клиенты и прочее по образцу.
+//  Проблема, требующая решения: updatedState == null.
+
+import niffler.api.NifflerUserdataClient;
+import niffler.dto.UserJson;
+import niffler.jupiter.UserConverter;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.converter.ConvertWith;
+import org.junit.jupiter.params.provider.ValueSource;
+
+public class NifflerUpdateUserProfileTest {
+
+    private NifflerUserdataClient nifflerUserdataClient = new NifflerUserdataClient();
+
+    @ValueSource(strings = {
+            "data/JsonSamples/UpdateUserSample1.json",
+            "data/JsonSamples/UpdateUserSample2.json"
+    })
+    @ParameterizedTest
+    void updateProfile(@ConvertWith(UserConverter.class) UserJson userJson) throws Exception {
+        UserJson updatedState = nifflerUserdataClient.updateUser(userJson);
+        Assertions.assertEquals(updatedState.id(), userJson.id());
+        Assertions.assertEquals(updatedState.fullname(), userJson.fullname());
+    }
+}

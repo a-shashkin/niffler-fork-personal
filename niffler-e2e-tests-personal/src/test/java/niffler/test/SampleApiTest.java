@@ -1,7 +1,6 @@
 package niffler.test;
 
 import niffler.api.NifflerSpendClient;
-import niffler.jupiter.Spend;
 import niffler.dto.SpendJson;
 import niffler.jupiter.SpendConverter;
 import org.junit.jupiter.api.Assertions;

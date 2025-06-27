@@ -1,0 +1,11 @@
+{
+  "id": "31c24869-8b33-48ca-9a2e-4f65f1bc7d67",
+  "username": "testuser",
+  "firstname": "Aleksandr",
+  "surname": "Shashkin",
+  "fullname": "Aleksandr Shashkin",
+  "currency": "RUB",
+  "photo": "",
+  "photoSmall": "",
+  "friendshipStatus": "INVITE_SENT"
+}
