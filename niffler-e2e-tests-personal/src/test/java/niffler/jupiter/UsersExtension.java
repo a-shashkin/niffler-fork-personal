@@ -17,7 +17,7 @@ import static niffler.jupiter.User.UserType.COMMON;
 // TODO дополнить UsersExtension возможностью указать двух юзеров разных типов в одном тесте.
 //  UsersExtension должен обеспечивать резолв обоих юзеров,
 //  дожидаясь, пока нужная для теста комбинация не станет доступна в очередях.
-//  Вместе с этим надо будет и SampleApiTest допилить.
+//  Вместе с этим надо будет и NifflerLoginTest допилить.
 
 public class UsersExtension implements
         BeforeAllCallback,

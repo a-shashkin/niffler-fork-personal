@@ -88,4 +88,19 @@ public class NifflerLoginTest {
                     .shouldBe(Condition.visible);
         });
     }
+
+    @AllureId("6")
+    @Test
+    void mainPageMustShowAfterLoginTest6(@User(userType = User.UserType.ADMIN) UserModel userFirst,
+                                         @User(userType = User.UserType.COMMON) UserModel userSecond) {
+        System.out.println("### Test 1 " + user.toString());
+        Allure.step("Check login", () -> {
+            open("http://127.0.0.1:9000/login");
+            $("input[name='username']").setValue("Kaiser");
+            $("input[name='password'").setValue("DarkKaiser93");
+            $("button[type='submit']").click();
+            $(".MuiTypography-root.MuiTypography-h5.css-126ce46")
+                    .shouldBe(Condition.visible);
+        });
+    }
 }
