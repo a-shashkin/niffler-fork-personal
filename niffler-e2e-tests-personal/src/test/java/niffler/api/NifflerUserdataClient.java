@@ -13,7 +13,7 @@ public class NifflerUserdataClient {
             .build();
 
     private Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(NifflerSpendService.nifflerSpendUri)
+            .baseUrl(NifflerUserdataService.nifflerUserdataUri)
             .addConverterFactory(JacksonConverterFactory.create())
             .build();
 

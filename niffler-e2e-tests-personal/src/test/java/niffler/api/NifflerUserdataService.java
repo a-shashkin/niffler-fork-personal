@@ -1,6 +1,5 @@
 package niffler.api;
 
-import niffler.dto.SpendJson;
 import niffler.dto.UserJson;
 import retrofit2.Call;
 import retrofit2.http.Body;
